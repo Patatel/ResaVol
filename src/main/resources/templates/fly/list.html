@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{common.html :: #header}">
+</head>
+<body>
+<div th:replace="common.html :: #menu"></div>
+<div class="container">
+    <div class="row"><h2>La liste des vols</h2></div>
+    <div class="row col-md-8">
+        <p> <a href="/fly/add" class="btn btn-primary btn-sm">Nouveau vol</a></p>
+        <table class="table table-bordered table-sm">
+            <thead>
+            <tr>
+                <th>Matricule</th>
+                <th>Départ</th>
+                <th>Arriver</th>
+                <th>Pilots</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="fly : ${fly}">
+                <td style="width: 10%" th:text="${fly.fly_id}"></td>
+                <td th:text="${fly.city_departur} - ${fly.departurTime}"></td>
+                <td th:text="${fly.city_arrival} - ${fly.arrivalTime}"></td>
+                <td th:text="$Pilots"></td>
+                <td>
+                    <a th:href="@{/fly/update/{id}(id=${fly.id})}"><button class="btn btn-info">Modifier</button></a>
+                    <a th:href="@{/fly/delete/{id}(id=${fly.id})}"><button class="btn btn-danger">Supprimer</button></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div th:replace="common.html :: #js-script"></div>
+</body>
+</html>
